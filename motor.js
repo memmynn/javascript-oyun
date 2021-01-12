@@ -46,18 +46,18 @@ if(counter === 0){
 
 function elementEkle(){
     if (metinler[sonra].ozellikler){
-    
+        //elementArray temizleme
         elementArray =[];
-        /**dugmeArray'e i indeksi kadar düğme ekleme */
+        /**elementArray'e özellik ekleme */
         for(let j= 0; j<metinler[sonra].ozellikler.length; j++){
-            /**dugmeArray'e buton ekleme */
             elementArray[j] = document.createElement(Object.keys(metinler[sonra].ozellikler[j]));
-            /**eklenen butonun içeriğini ekleme */
+            //image'a source ekleme
             if (elementArray[j].tagName=="IMG"){
                 elementArray[j].src= Object.values(metinler[sonra].ozellikler[j]);}
+           //element e içerik ekleme    
             else {elementArray[j].innerText =Object.values(metinler[sonra].ozellikler[j])}
         }
-        
+        //oyunContainer'e element ekleme
         for (let elem=0; elem<elementArray.length; elem++) {
                 document.getElementById("oyunContainer").appendChild(elementArray[elem])
         };
@@ -71,16 +71,24 @@ function sifirlama(id){
         document.getElementById(id).textContent =''
         }
 }
+//body,'ye değişken ekle
 function ekleme(degisken){
     document.body.append(degisken);
 }
+
+//oyunu çalıştırma
 function otomat(){
+    //oyunContainer ekleme
     ekleme(oyunContainer);
+    //oyunContainer içerik sıfırlama
     sifirlama("oyunContainer");
-    /**dugmeArray ve dugmeDiv her otomat fonksiyonu çalıştırılışında temizlenir */
+    /**dugmeArray temizle */
     dugmeArray=[];
+    //özellik ekle
     elementEkle();
+    //dugmeleri ekle
     document.getElementById("oyunContainer").appendChild(dugmeContainer);
+    //düğmeContainer temizle
     document.getElementById("dugmeContainer").textContent = '';
     /**dugmeArray'e i indeksi kadar düğme ekleme */
     for(let i= 0; i<metinler[sonra].siklar.length; i++){
@@ -95,7 +103,7 @@ function otomat(){
             otomat()
         })
     }
-    /**dugmeDiv elementine button ekleme */
+    /**dugmeContainer'a düğme ekleme */
         for(let dugme=0; dugme<dugmeArray.length; dugme++){
             document.getElementById("dugmeContainer").appendChild(dugmeArray[dugme]);
         }
